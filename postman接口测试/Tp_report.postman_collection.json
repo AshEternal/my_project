@@ -1,0 +1,350 @@
+{
+  "info": {
+    "_postman_id": "758d7ce0-85d3-466a-849c-cee624b895a1",
+    "name": "Tp_report",
+    "description": "这是针对Top_shop网页的接口测试，主要针对搜索，登录，加入购物车进行测试，其中发现登录bug\\*1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53749122",
+    "_collection_link": "https://go.postman.co/collection/53749122-758d7ce0-85d3-466a-849c-cee624b895a1?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "search",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://hmshop-test.itheima.net/index.php/Home/Goods/search.html?q=%E6%89%8B%E6%9C%BA",
+          "protocol": "https",
+          "host": [
+            "hmshop-test",
+            "itheima",
+            "net"
+          ],
+          "path": [
+            "index.php",
+            "Home",
+            "Goods",
+            "search.html"
+          ],
+          "query": [
+            {
+              "key": "q",
+              "value": "%E6%89%8B%E6%9C%BA"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "login_error",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"状态码为 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"返回包含status的字段\", function () {\r",
+              "    pm.expect(pm.response.text()).to.include(\"status\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"返回包含msg的字段 \", function () {\r",
+              "    pm.expect(pm.response.text()).to.include(\"msg\");\r",
+              "});\r",
+              "\r",
+              " //断言 响应体中的json数据\r",
+              "pm.test(\"status为0\", function () {\r",
+              "    var jsonData = pm.response.json();  //定义一个变量名称jsonData，值为json格式的响应体数据\r",
+              "    pm.expect(jsonData.status).to.eql(0);//断言响应体中的status为0\r",
+              "});\r",
+              "\r",
+              "pm.test(\"msg为验证码错误\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.msg).to.eql(\"验证码错误\");//断言响应体中的msg为\"验证码错误\"\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "username",
+              "value": "18856887788",
+              "type": "text",
+              "uuid": "323a1c7c-1e20-49d8-bf63-6ab80a860beb"
+            },
+            {
+              "key": "password",
+              "value": "asdfsdf",
+              "type": "text",
+              "uuid": "f042691a-2919-4e00-b4eb-7bfdca1402d9"
+            },
+            {
+              "key": "verify_code",
+              "value": "8888",
+              "type": "text",
+              "uuid": "7ee81683-1555-421b-a025-e3370effac43"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://hmshop-test.itheima.net/index.php?m=Home&c=User&a=do_login&t=0.9959651468187831",
+          "protocol": "https",
+          "host": [
+            "hmshop-test",
+            "itheima",
+            "net"
+          ],
+          "path": [
+            "index.php"
+          ],
+          "query": [
+            {
+              "key": "m",
+              "value": "Home"
+            },
+            {
+              "key": "c",
+              "value": "User"
+            },
+            {
+              "key": "a",
+              "value": "do_login"
+            },
+            {
+              "key": "t",
+              "value": "0.9959651468187831"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"状态码为 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"返回包含status的字段\", function () {\r",
+              "    pm.expect(pm.response.text()).to.include(\"status\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"status为0\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.status).to.eql(0);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"返回包含msg的字段\", function () {\r",
+              "    pm.expect(pm.response.text()).to.include(\"msg\");\r",
+              "});\r",
+              "\r",
+              "\r",
+              "pm.test(\"msg\\u9a8c\\u8bc1\\u7801\\u9519\\u8bef\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.msg).to.eql(\"\\u9a8c\\u8bc1\\u7801\\u9519\\u8bef\");\r",
+              "});\r",
+              "\r",
+              "\r",
+              "// 复现Bug：验证码错误但实际应该成功\r",
+              "pm.test(\"【Bug复现】相同参数浏览器成功，Postman失败\", function () {\r",
+              "    var jsonData = pm.response.json();\r",
+              "    // 预期应该是\"登录成功\"，实际是\"验证码错误\"\r",
+              "    console.log(\"实际返回：\" + jsonData.msg);\r",
+              "    pm.expect(jsonData.msg).to.eql(\"登录成功\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "username",
+              "value": "15856887788",
+              "type": "text",
+              "uuid": "493f3e35-85a5-491c-ba6f-3e24a8fd44fd"
+            },
+            {
+              "key": "password",
+              "value": "1234567",
+              "type": "text",
+              "uuid": "39c03849-9306-4ae8-a5b4-531ef0371bd8"
+            },
+            {
+              "key": "verify_code",
+              "value": "8888",
+              "type": "text",
+              "uuid": "7209d589-7717-4232-9c8f-7b809d1e3e83"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://hmshop-test.itheima.net/index.php?m=Home&c=User&a=do_login&t=0.8762570584030868",
+          "protocol": "https",
+          "host": [
+            "hmshop-test",
+            "itheima",
+            "net"
+          ],
+          "path": [
+            "index.php"
+          ],
+          "query": [
+            {
+              "key": "m",
+              "value": "Home"
+            },
+            {
+              "key": "c",
+              "value": "User"
+            },
+            {
+              "key": "a",
+              "value": "do_login"
+            },
+            {
+              "key": "t",
+              "value": "0.8762570584030868"
+            }
+          ]
+        },
+        "description": "##已知bug\n\n现象：使用相同参数username=15856887788 password=1234567 verify_code=8888，浏览器登录成功\n\n而postman显示验证码错误\n\n状态：已提交bug\n\n<img src=\"https://content.pstmn.io/3b26638f-e6c3-453e-aeb8-d248d60e4f00/aW1hZ2UucG5n\" alt=\"\" height=\"1070\" width=\"1489\">"
+      },
+      "response": []
+    },
+    {
+      "name": "cart",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"状态码为 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"返回包含status的字段\", function () {\r",
+              "    pm.expect(pm.response.text()).to.include(\"status\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded; charset=UTF-8",
+            "type": "text"
+          },
+          {
+            "key": "Cookie",
+            "value": "province_id=1; city_id=2; district_id=3;",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "goods_id",
+              "value": "13",
+              "type": "text",
+              "uuid": "54192354-34a7-463b-92a7-8a0c423e3628"
+            },
+            {
+              "key": "goods_num",
+              "value": "1",
+              "type": "text",
+              "uuid": "8aa12026-302e-4dc5-ad16-6f262cee1adf"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://hmshop-test.itheima.net/index.php?m=Home&c=Cart&a=add",
+          "protocol": "https",
+          "host": [
+            "hmshop-test",
+            "itheima",
+            "net"
+          ],
+          "path": [
+            "index.php"
+          ],
+          "query": [
+            {
+              "key": "m",
+              "value": "Home"
+            },
+            {
+              "key": "c",
+              "value": "Cart"
+            },
+            {
+              "key": "a",
+              "value": "add"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
