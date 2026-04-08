@@ -39,7 +39,17 @@
 
 **使用工具**：禅道 / Excel 
 
+## 项目三：Postman接口测试
 
-## 技能标签
+**测试对象**：tp商城登录、搜索、购物车接口
 
-功能测试 | 用例设计 | Bug跟踪 | Web/App测试
+**测试内容**：
+- 编写状态码、业务状态、文本内容等断言
+- 使用 Newman 执行脚本并生成 HTML 测试报告
+- 共执行 4 个接口、14 条断言，发现 1 个接口Bug（浏览器与Postman返回不一致）
+
+**测试产出**：
+- [Postman用例集](./postman接口测试/Tp_report.postman_collection.json)
+- [Newman测试报告](./postman接口测试/Tp_report.html)
+
+**使用工具**：Postman、Newman
